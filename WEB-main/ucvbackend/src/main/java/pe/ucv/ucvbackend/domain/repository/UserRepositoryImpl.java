@@ -5,6 +5,7 @@ import pe.ucv.ucvbackend.persistence.entity.Usuario;
 import pe.ucv.ucvbackend.persistence.mapper.UserMapper;
 import pe.ucv.ucvbackend.persistence.repository.UsuarioJpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.List;
 
 import java.util.Optional;
 
@@ -37,4 +38,12 @@ public class UserRepositoryImpl implements UserRepository {
         return usuarioJpaRepository.findById(id)
                 .map(userMapper::toUser);
     }
+
+    @Override
+public List<User> findAll() {
+    return usuarioJpaRepository.findAll()
+            .stream()
+            .map(userMapper::toUser)
+            .toList();
+}
 }
