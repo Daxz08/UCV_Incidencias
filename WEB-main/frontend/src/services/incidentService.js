@@ -48,3 +48,9 @@ export async function getIncidentsByCategory(categoryId) {
 export async function getIncidentsByDepartment(departmentId) {
   return apiRequest(`/incidentsByDepartment/${departmentId}`);
 }
+export async function filterIncidents(filters) {
+  return apiRequest('/incidentFilter', {
+    method: 'POST',
+    body: filters
+  });
+}
