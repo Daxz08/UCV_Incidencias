@@ -33,6 +33,15 @@ const DashboardPage = () => {
             </div>
           </div>
         </div>
+        <div className="col-md-3">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">Empleados</h5>
+              <p className="card-text">Gestiona los empleados del sistema</p>
+              <Link to="/User" className="btn btn-info">Ir a Empleados</Link>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

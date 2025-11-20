@@ -2,13 +2,14 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import AdminLayout from "./components/layout/AdminLayout";
 
-// Importar páginas - SIN extensiones
+// Importar páginas
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import CategoriesPage from "./pages/CategoriesPage";
 import DepartmentsPage from "./pages/DepartmentsPage";
 import IncidentsPage from "./pages/IncidentsPage";
+import UsersPage from "./pages/UsersPage"; 
 
 function App() {
   return (
@@ -51,21 +52,31 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/users"
+          element={
+            <ProtectedRoute>
+              <AdminLayout>
+                <UsersPage />
+              </AdminLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/incidents"
+          element={
+            <ProtectedRoute>
+              <AdminLayout>
+                <IncidentsPage />
+              </AdminLayout>
+            </ProtectedRoute>
+          }
+        />
 
         <Route path="/category" element={<Navigate to="/categories" replace />} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
-      <Route
-  path="/incidents"
-  element={
-    <ProtectedRoute>
-      <AdminLayout>
-        <IncidentsPage />
-      </AdminLayout>
-    </ProtectedRoute>
-  }
-/>
-      
       </Routes>
     </Router>
   );
