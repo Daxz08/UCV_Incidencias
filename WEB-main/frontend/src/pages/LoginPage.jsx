@@ -9,6 +9,9 @@ const LoginPage = () => {
       <p style={{ marginTop: 10 }}>
         ¿No tienes cuenta? <a href="/register">Registrarse</a>
       </p>
+      <p style={{ marginTop: 10 }}>
+        ¿Olvidaste tu contraseña? <a href="/change-password">Cambiar contraseña</a>
+      </p>
     </div>
   );
 };

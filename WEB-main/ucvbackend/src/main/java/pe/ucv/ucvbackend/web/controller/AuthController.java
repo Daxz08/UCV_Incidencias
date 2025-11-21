@@ -2,6 +2,7 @@ package pe.ucv.ucvbackend.web.controller;
 
 import pe.ucv.ucvbackend.domain.dto.AuthResponse;
 import pe.ucv.ucvbackend.domain.dto.AuthenticationRequest;
+import pe.ucv.ucvbackend.domain.dto.ChangePasswordRequest;
 import pe.ucv.ucvbackend.domain.dto.RegisterRequest;
 import pe.ucv.ucvbackend.domain.service.AuthService;
 import org.slf4j.Logger;
@@ -36,4 +37,9 @@ public class AuthController {
         logger.info("******************************************");
         return ResponseEntity.ok(authService.authenticate(request));
     }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<AuthResponse> changePassword(@RequestBody ChangePasswordRequest request) {
+        return ResponseEntity.ok(authService.changePassword(request));
+}
 }
