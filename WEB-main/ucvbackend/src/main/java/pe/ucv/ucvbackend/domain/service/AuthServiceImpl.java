@@ -4,6 +4,7 @@ import pe.ucv.ucvbackend.domain.User;
 import pe.ucv.ucvbackend.domain.Role;
 import pe.ucv.ucvbackend.domain.dto.AuthResponse;
 import pe.ucv.ucvbackend.domain.dto.AuthenticationRequest;
+import pe.ucv.ucvbackend.domain.dto.ChangePasswordRequest;
 import pe.ucv.ucvbackend.domain.dto.RegisterRequest;
 import pe.ucv.ucvbackend.domain.repository.UserRepository;
 import pe.ucv.ucvbackend.domain.config.JwtService;
@@ -96,6 +97,40 @@ public class AuthServiceImpl implements AuthService {
         logger.info("Token JWT generado para el usuario autenticado");
 
         // 4. Retornar respuesta
+        return AuthResponse.create(jwtToken);
+    }
+    @Override
+    public AuthResponse changePassword(ChangePasswordRequest request) {
+
+        User user = null;
+
+        // 1. Buscar primero por ID si está presente
+        if (request.getUserId() != null) {
+            user = userRepository.findById(request.getUserId())
+                    .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado por ID"));
+        }
+        // 2. Si no vino ID, buscar por email
+        else if (request.getEmail() != null) {
+            user = userRepository.findByEmail(request.getEmail())
+                    .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado por email"));
+        }
+        // 3. Si no vino ningún identificador
+        else {
+            throw new IllegalArgumentException("Debe proporcionar userId o email");
+        }
+
+        // 4. Validar contraseña antigua
+        if (!passwordEncoder.matches(request.getOldPassword(), user.getPassword())) {
+            throw new IllegalStateException("La contraseña actual es incorrecta");
+        }
+
+        // 5. Guardar nueva contraseña codificada
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        userRepository.save(user);
+
+        // 6. Generar token nuevo (opcional)
+        String jwtToken = jwtService.generateToken(user);
+
         return AuthResponse.create(jwtToken);
     }
 }

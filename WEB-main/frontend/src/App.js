@@ -9,6 +9,7 @@ import DashboardPage from "./pages/DashboardPage";
 import CategoriesPage from "./pages/CategoriesPage";
 import DepartmentsPage from "./pages/DepartmentsPage";
 import IncidentsPage from "./pages/IncidentsPage";
+import ChangePasswordPage from "./pages/ChangePasswordPage";
 
 function App() {
   return (
@@ -17,10 +18,10 @@ function App() {
         {/* Rutas Públicas */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-
+        <Route path="/change-password" element={<ChangePasswordPage />} />  
         {/* Rutas Protegidas */}
         <Route
-          path="/"
+          path="/"  
           element={
             <ProtectedRoute>
               <AdminLayout>

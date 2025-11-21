@@ -37,7 +37,9 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/ucv/authenticate",
                                 "/api/ucv/register",
-                                "/api/ucv/publictest"
+                                "/api/ucv/publictest",
+                                "/api/ucv/change-password"
+
                         ).permitAll()
                         .anyRequest().authenticated()) // ✅ TODAS LAS DEMÁS RUTAS REQUIEREN AUTENTICACIÓN
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
