@@ -5,6 +5,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
+import Dashboard from "../components/dashboard/Dashboard"; 
+
 
 export default function IncidentsPage() {
   const [incidentEditar, setIncidentEditar] = useState(null);
@@ -24,6 +26,11 @@ export default function IncidentsPage() {
       <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
         Reporte y seguimiento de incidentes en la universidad
       </Typography>
+
+      {/* Dashboard con métricas */}
+      <Paper elevation={2} sx={{ p: 3, mb: 4 }}>
+        <Dashboard />
+      </Paper>
 
       <Divider sx={{ mb: 4 }} />
 

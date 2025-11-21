@@ -38,7 +38,8 @@ public class SecurityConfig {
                                 "/api/ucv/authenticate",
                                 "/api/ucv/register",
                                 "/api/ucv/publictest",
-                                "/api/ucv/change-password"
+                                "/api/ucv/change-password",
+                                "/api/ucv/incidentMetrics"
 
                         ).permitAll()
                         .anyRequest().authenticated()) // ✅ TODAS LAS DEMÁS RUTAS REQUIEREN AUTENTICACIÓN

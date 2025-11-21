@@ -15,4 +15,6 @@ public interface IncidentService {
     List<Incident> getIncidentsByUserId(Long userId);
     List<Incident> getIncidentsByCategoryId(Long categoryId);
     List<Incident> getIncidentsByDepartmentId(Long departmentId);
+    long getTotalIncidents();
+    long getTotalByPriority(String priorityLevel);
 }

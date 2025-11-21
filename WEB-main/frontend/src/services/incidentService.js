@@ -48,3 +48,7 @@ export async function getIncidentsByCategory(categoryId) {
 export async function getIncidentsByDepartment(departmentId) {
   return apiRequest(`/incidentsByDepartment/${departmentId}`);
 }
+
+export async function getIncidentMetrics() {
+  return apiRequest("/incidentMetrics"); // sin options
+}

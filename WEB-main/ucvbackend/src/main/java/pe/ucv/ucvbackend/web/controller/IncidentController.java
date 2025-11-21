@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/ucv")
@@ -167,4 +168,32 @@ public class IncidentController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+
+    @GetMapping("/incidentMetrics")
+    public ResponseEntity<Map<String, Long>> getIncidentMetrics() {
+    try {
+        long total = incidentService.getTotalIncidents();
+        long alto = incidentService.getTotalByPriority("Alto");
+        long medio = incidentService.getTotalByPriority("Medio");
+        long bajo = incidentService.getTotalByPriority("Bajo");
+
+        Map<String, Long> metrics = Map.of(
+            "total", total,
+            "alto", alto,
+            "medio", medio,
+            "bajo", bajo
+        );
+        return ResponseEntity.ok(metrics);
+    } catch (Exception e) {
+        logger.error("Error getting incident metrics: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+    
+
+
+
+
+
 }

@@ -198,4 +198,18 @@ public class IncidentServiceImpl implements IncidentService {
                 .map(incidentMapper::toIncident)
                 .toList();
     }
+@Override
+@Transactional(readOnly = true)
+public long getTotalIncidents() {
+    return incidenciaRepository.count();
+}
+
+@Override
+@Transactional(readOnly = true)
+public long getTotalByPriority(String priorityLevel) {
+    return incidenciaRepository.findByNivelPrioridad(priorityLevel).size();
+}
+
+
+
 }
